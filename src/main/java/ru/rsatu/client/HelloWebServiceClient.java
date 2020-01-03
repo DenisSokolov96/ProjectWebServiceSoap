@@ -22,12 +22,12 @@ public class HelloWebServiceClient {
         log.info("Start Client...");
 
         // создаем ссылку на wsdl описание
-        URL url = new URL("http://schemas.xmlsoap.org/wsdl/");//"http://localhost:9913/SoapProject_war_exploded?wsdl");
+        URL url = new URL("http://localhost:9913/ProjectWebServiceSoap/service?wsdl");
         // Параметры следующего конструктора смотрим в самом первом теге WSDL описания - definitions
         // 1-ый аргумент смотрим в атрибуте targetNamespace
         // 2-ой аргумент смотрим в атрибуте name
-        QName qname = new QName("http://localhost:9913/ProjectWebServiceSoap/service",
-                                    /*"HelloWebServiceImpl"*/"");
+        QName qname = new QName("http://ws.rsatu.ru/",
+                                    "HelloWebServiceImplService");
 
         // Теперь мы можем дотянуться до тега service в wsdl описании
         Service service = Service.create(url, qname);
