@@ -34,30 +34,10 @@ public class HelloWebServiceClient {
 
         // а далее и до вложенного в него тега port, чтобы
         // получить ссылку на удаленный от нас объект веб-сервиса
-        HelloWebService hello = service.getPort(HelloWebServiceImpl.class);
+        HelloWebService hello = service.getPort(HelloWebService.class);
 
         System.out.println(hello.getHelloString("Денис. Работает"));
         log.info("...Stop Client.");
     }
 
 }
-
-/*     //javarush
-       // создаем ссылку на wsdl описание
-        URL url = new URL("http://localhost:9999/vs/denis?wsdl");
-
-        // Параметры следующего конструктора смотрим в самом первом теге WSDL описания - definitions
-        // 1-ый аргумент смотрим в атрибуте targetNamespace
-        // 2-ой аргумент смотрим в атрибуте name
-        QName qname = new QName("http://localhost:9913/SoapProject_war_exploded/service",
-                                    "HelloWebServiceImplService");
-
-        // Теперь мы можем дотянуться до тега service в wsdl описании,
-        Service service = Service.create(url, qname);
-        // а далее и до вложенного в него тега port, чтобы
-        // получить ссылку на удаленный от нас объект веб-сервиса
-        HelloWebService hello = service.getPort(HelloWebServiceImpl.class);
-
-        // Ура! Теперь можно вызывать удаленный метод
-        System.out.println(hello.getHelloString("Денис. Работает"));
- */
