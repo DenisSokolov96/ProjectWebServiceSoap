@@ -5,12 +5,12 @@
          version="4.0">
     <display-name>SoapService</display-name>
     <servlet>
-        <servlet-name>HelloWebServiceImpl</servlet-name>
-        <servlet-class>ru.rsatu.ws.HelloWebServiceImpl</servlet-class>
+        <servlet-name>ClassWebServiceImpl</servlet-name>
+        <servlet-class>ru.rsatu.ws.ClassWebServiceImpl</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HelloWebServiceImpl</servlet-name>
+        <servlet-name>ClassWebServiceImpl</servlet-name>
         <url-pattern>/service</url-pattern>
     </servlet-mapping>
 
