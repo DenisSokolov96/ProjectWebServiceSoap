@@ -6,12 +6,11 @@ import ru.rsatu.client.WebServiceClient;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name="FruitWebServiceImpl")
-@XmlType(propOrder = {"allList","firstEl", "lastEl"})
+@XmlRootElement(name="ClassWebServiceImpl")
+@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlType(propOrder = {"allList","firstEl", "lastEl"})
 // endpointInterface - указывающим полное имя класса интерфейса веб-сервиса
 @WebService(endpointInterface = "ru.rsatu.ws.ClassWebService")
 public class ClassWebServiceImpl implements ClassWebService {
@@ -20,6 +19,12 @@ public class ClassWebServiceImpl implements ClassWebService {
     //private List<String> allList;
     //private String firstEl;
     //private String lastEl;
+    private static Logger log = Logger.getLogger(ClassWebServiceImpl.class);
+    @XmlAttribute(name="name")
+    private String name = "Denis";
+    public void getName(String name){
+        log.info("Service: " + name);
+        this.name = name; }
 
     @Override
     public void addElem(String str){
@@ -41,13 +46,13 @@ public class ClassWebServiceImpl implements ClassWebService {
     @Override
     public String getFirstEl() {
         if (!listStr.isEmpty()) return listStr.get(0);
-        else return "";
+        else return "пусто";
     }
 
     @XmlElement(name="LastEl")
     public String getLastEl() {
         if (!listStr.isEmpty()) return listStr.get(listStr.size()-1);
-        else return "";
+        else return "пусто";
     }
 
     @Override
