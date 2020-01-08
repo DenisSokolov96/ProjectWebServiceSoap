@@ -3,13 +3,14 @@ package ru.rsatu.ws;
 import org.apache.log4j.Logger;
 import ru.rsatu.client.WebServiceClient;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name="ClassWebServiceImpl")
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name="ClassWebServiceImpl")
+//@XmlAccessorType(XmlAccessType.FIELD)
 //@XmlType(propOrder = {"allList","firstEl", "lastEl"})
 // endpointInterface - указывающим полное имя класса интерфейса веб-сервиса
 @WebService(endpointInterface = "ru.rsatu.ws.ClassWebService")
@@ -20,11 +21,6 @@ public class ClassWebServiceImpl implements ClassWebService {
     //private String firstEl;
     //private String lastEl;
     private static Logger log = Logger.getLogger(ClassWebServiceImpl.class);
-    @XmlAttribute(name="name")
-    private String name = "Denis";
-    public void getName(String name){
-        log.info("Service: " + name);
-        this.name = name; }
 
     @Override
     public void addElem(String str){
@@ -36,20 +32,20 @@ public class ClassWebServiceImpl implements ClassWebService {
         listStr.clear();
     }
 
-    @XmlElement(name="AllList")
+    //@XmlElement(name="AllList")
     @Override
     public String getAllList() {
         return listStr.toString();
     }
 
-    @XmlElement(name="FirstEl")
+    //@XmlElement(name="FirstEl")
     @Override
     public String getFirstEl() {
         if (!listStr.isEmpty()) return listStr.get(0);
-        else return "пусто";
+        else return "";
     }
 
-    @XmlElement(name="LastEl")
+    //@XmlElement(name="LastEl")
     public String getLastEl() {
         if (!listStr.isEmpty()) return listStr.get(listStr.size()-1);
         else return "пусто";

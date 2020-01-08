@@ -33,18 +33,20 @@ public class WebServiceClient {
 
     public static void test(){
         try {
-            String url = "http://localhost:9913/ProjectWebServiceSoap/service";//"http://www.holidaywebservice.com/HolidayService_v2/HolidayService2.asmx?op=GetHolidaysAvailable";
+
+            String url = "http://localhost:9913/ProjectWebServiceSoap/service";
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type","text/soap+xml; charset=utf-8");
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type","application/soap+xml; charset=utf-8");
             String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                    "<soap12:Envelope xmlns:xsi=\"https://www.standart-namespace.com/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"> " +
-                    " <soap12:Body> " +
-                    " <ClassWebServiceImpl name=" + "name" +"> " +
-                    " </ClassWebServiceImpl>" +
-                    " </soap12:Body>" +
-                    "</soap12:Envelope>";
+                    "<soap:Envelope " +
+                    " xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> " +
+                    "<soap:Body>" +
+                    "<m:addElem xmlns:m=\"http://ws.rsatu.ru/\">" +
+                    "</m:addElem>"+
+                    "</soap:Body>" +
+                    "</soap:Envelope>";
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(xml);
@@ -53,8 +55,9 @@ public class WebServiceClient {
             String responseStatus = con.getResponseMessage();
             System.out.println("Response status: "+responseStatus);
             System.out.println("Error: " + con.getResponseCode());
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getErrorStream()));//con.getInputStream()));
+            BufferedReader in;
+            if (con.getResponseCode()!=200) in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            else in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {

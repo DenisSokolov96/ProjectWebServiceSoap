@@ -1,1 +1,1 @@
-2020-01-07 23:36:57 ERROR WebServiceClient:67 - java.io.IOException: Server returned HTTP response code: 500 for URL: http://localhost:9913/ProjectWebServiceSoap/service
+2020-01-08 17:03:05 ERROR WebServiceClient:71 - java.net.ConnectException: Connection refused (Connection refused)
